@@ -102,7 +102,13 @@ $text = isset($_POST['text']) ? $_POST['text'] : '';
             <button type="button" data-action="upper">upper case</button>
             <button type="button" data-action="capitalize">Capitalize Case</button>
             <button type="button" data-action="title">Title Case</button>
+
+            <button type="button" data-action="alternate">aLtErNaTe Case</button>
             <button type="button" data-action="inverse">Inverse Case</button>
+            <button type="button" data-action="toggle">Toggle Case</button>
+
+            <button type="button" data-action="inverse">Inverse Case</button>
+
             <button type="button" data-action="copy" class="secondary">Copy To Clipboard</button>
             <button type="button" data-action="hyphen">Hyphen</button>
             <button type="button" data-action="underscore">Underscore</button>
@@ -129,6 +135,20 @@ $text = isset($_POST['text']) ? $_POST['text'] : '';
         return text.toLowerCase().replace(/\b([a-z])/g, (match, p1) => p1.toUpperCase());
     }
 
+
+    function alternateCase(text) {
+        let makeUpper = true;
+        return text.split('').map((ch) => {
+            if (/[a-zA-Z]/.test(ch)) {
+                const updated = makeUpper ? ch.toUpperCase() : ch.toLowerCase();
+                makeUpper = !makeUpper;
+                return updated;
+            }
+            return ch;
+        }).join('');
+    }
+
+
     function inverseCase(text) {
         return text.split('').map((ch) => {
             if (ch >= 'a' && ch <= 'z') return ch.toUpperCase();
@@ -136,6 +156,21 @@ $text = isset($_POST['text']) ? $_POST['text'] : '';
             return ch;
         }).join('');
     }
+
+
+    function toggleCase(text) {
+        if (!text) return '';
+
+        const hasUpper = /[A-Z]/.test(text);
+        const hasLower = /[a-z]/.test(text);
+
+        if (hasUpper && hasLower) {
+            return inverseCase(text);
+        }
+
+        return hasLower ? text.toUpperCase() : text.toLowerCase();
+    }
+
 
     function updateCounts(text) {
         const characters = text.length;
@@ -171,10 +206,22 @@ $text = isset($_POST['text']) ? $_POST['text'] : '';
                 value = titleCase(value);
                 status = 'Converted to Title Case.';
                 break;
+
+            case 'alternate':
+                value = alternateCase(value);
+                status = 'Converted to aLtErNaTe Case.';
+                break;
+
             case 'inverse':
                 value = inverseCase(value);
                 status = 'Converted to Inverse Case.';
                 break;
+
+            case 'toggle':
+                value = toggleCase(value);
+                status = 'Toggled case for the text.';
+                break;
+
             case 'copy':
                 navigator.clipboard.writeText(value).then(() => {
                     $('#status').text('Copied to clipboard.');
