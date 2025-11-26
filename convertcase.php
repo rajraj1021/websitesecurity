@@ -107,7 +107,6 @@ $text = isset($_POST['text']) ? $_POST['text'] : '';
             <button type="button" data-action="inverse">Inverse Case</button>
             <button type="button" data-action="toggle">Toggle Case</button>
 
-
             <button type="button" data-action="alternate">aLtErNaTe Case</button>
             <button type="button" data-action="inverse">Inverse Case</button>
             <button type="button" data-action="toggle">Toggle Case</button>
@@ -117,7 +116,13 @@ $text = isset($_POST['text']) ? $_POST['text'] : '';
             <button type="button" data-action="inverse">Inverse Case</button>
             <button type="button" data-action="toggle">Toggle Case</button>
 
+
+            <button type="button" data-action="alternate">aLtErNaTe Case</button>
             <button type="button" data-action="inverse">Inverse Case</button>
+            <button type="button" data-action="toggle">Toggle Case</button>
+
+            <button type="button" data-action="inverse">Inverse Case</button>
+
 
 
 
