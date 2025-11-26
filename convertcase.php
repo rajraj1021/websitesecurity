@@ -107,7 +107,13 @@ $text = isset($_POST['text']) ? $_POST['text'] : '';
             <button type="button" data-action="inverse">Inverse Case</button>
             <button type="button" data-action="toggle">Toggle Case</button>
 
+
+            <button type="button" data-action="alternate">aLtErNaTe Case</button>
             <button type="button" data-action="inverse">Inverse Case</button>
+            <button type="button" data-action="toggle">Toggle Case</button>
+
+            <button type="button" data-action="inverse">Inverse Case</button>
+
 
             <button type="button" data-action="copy" class="secondary">Copy To Clipboard</button>
             <button type="button" data-action="hyphen">Hyphen</button>
@@ -135,7 +141,10 @@ $text = isset($_POST['text']) ? $_POST['text'] : '';
         return text.toLowerCase().replace(/\b([a-z])/g, (match, p1) => p1.toUpperCase());
     }
 
+## <<<<<<< codex/check-https-connection-for-website-4b14nl
+## =======
 
+## >>>>>>> main
     function alternateCase(text) {
         let makeUpper = true;
         return text.split('').map((ch) => {
@@ -148,7 +157,10 @@ $text = isset($_POST['text']) ? $_POST['text'] : '';
         }).join('');
     }
 
+## <<<<<<< codex/check-https-connection-for-website-4b14nl
 
+
+## >>>>>>> main
     function inverseCase(text) {
         return text.split('').map((ch) => {
             if (ch >= 'a' && ch <= 'z') return ch.toUpperCase();
@@ -157,7 +169,10 @@ $text = isset($_POST['text']) ? $_POST['text'] : '';
         }).join('');
     }
 
+## <<<<<<< codex/check-https-connection-for-website-4b14nl
 
+
+## >>>>>>> main
     function toggleCase(text) {
         if (!text) return '';
 
@@ -171,7 +186,10 @@ $text = isset($_POST['text']) ? $_POST['text'] : '';
         return hasLower ? text.toUpperCase() : text.toLowerCase();
     }
 
+## <<<<<<< codex/check-https-connection-for-website-4b14nl
+## =======
 
+## >>>>>>> main
     function updateCounts(text) {
         const characters = text.length;
         const words = text.trim() ? text.trim().split(/\s+/).filter(Boolean).length : 0;
@@ -206,6 +224,9 @@ $text = isset($_POST['text']) ? $_POST['text'] : '';
                 value = titleCase(value);
                 status = 'Converted to Title Case.';
                 break;
+
+
+
 
             case 'alternate':
                 value = alternateCase(value);
