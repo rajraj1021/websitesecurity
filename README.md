@@ -1,3 +1,4 @@
+
 This is Web Security Checker Tool
 ## HTTPS connection check script
 Use `check_https.php` to verify whether a website responds securely over HTTPS when the URL starts with `https://`.
@@ -38,3 +39,29 @@ Use `domainchecker.php` (or the helper entry page `domainenrty.html`) to calcula
 1. Serve the files locally (e.g., `php -S localhost:8000`).
 2. Open `http://localhost:8000/domainchecker.php` (or `domainenrty.html` if you prefer the separate entry page).
 3. Enter a website URL and submit to view the registration, update, expiration dates, and computed age pulled from RDAP.
+
+# This is Web Security Checker Tool
+
+## HTTPS connection check script
+Use `check_https.php` to verify whether a website responds securely over HTTPS when the URL starts with `https://`.
+
+### Requirements
+- PHP with cURL extension enabled
+
+### Domain Age Checker
+Use `domain_age.php` to check the domain creation date, expiry date, and overall domain age.
+
+### Case Converter
+Use `convertcase.php` to convert text into:
+- Uppercase
+- Lowercase
+- Alternate Case
+- Inverse Case
+- Toggle Case
+- Hyphen / Underscore
+- Reverse Text
+- Sentence/Word/Character Count
+
+### How to Run
+Upload the PHP files into a server that supports PHP, then open each tool in your browser:
+
