@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domain Age Checker</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-K+ctZQ+YdBV/OGJySlcF6lFqC9bYdY+4K4e72qYFAmE=" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary: #1976d2;
+            --primary-dark: #125a9c;
+            --error: #b00020;
+            --border: #d9d9d9;
+            --background: #f5f7fb;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: var(--background);
+            color: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+        .card {
+            width: 440px;
+            max-width: 100%;
+            background: #fff;
+            padding: 1.75rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        }
+        h1 {
+            margin: 0 0 0.35rem;
+            font-size: 1.4rem;
+        }
+        p {
+            margin: 0 0 1.2rem;
+            color: #4a4a4a;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+        }
+        input[type="url"] {
+            width: 100%;
+            padding: 0.8rem 0.9rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        input[type="url"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+        }
+        button {
+            margin-top: 1rem;
+            width: 100%;
+            padding: 0.85rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            background: var(--primary);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover { background: var(--primary-dark); }
+        .error {
+            margin-top: 0.35rem;
+            color: var(--error);
+            min-height: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>Check Domain Age</h1>
+    <p>Enter a website URL to calculate the domain age from its registration date.</p>
+    <form id="domain-age-form" action="domainchecker.php" method="get" novalidate>
+        <label for="url">Website URL</label>
+        <input type="url" id="url" name="url" placeholder="https://example.com" required>
+        <div id="error" class="error" aria-live="polite"></div>
+        <button type="submit">Determine Domain Age</button>
+    </form>
+</div>
+<script>
+    $(function () {
+        const errorEl = $('#error');
+        $('#domain-age-form').on('submit', function (event) {
+            const urlVal = $('#url').val().trim();
+            errorEl.text('');
+
+            if (!urlVal) {
+                event.preventDefault();
+                errorEl.text('Please enter a URL.');
+                return;
+            }
+
+            try {
+                const parsed = new URL(urlVal, window.location.href);
+                if (!['http:', 'https:'].includes(parsed.protocol)) {
+                    event.preventDefault();
+                    errorEl.text('Only http or https URLs are supported.');
+                }
+            } catch (err) {
+                event.preventDefault();
+                errorEl.text('Enter a valid URL (e.g., https://example.com).');
+            }
+        });
+    });
+</script>
+</body>
+</html>

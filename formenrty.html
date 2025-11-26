@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Framework Checker</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-K+ctZQ+YdBV/OGJySlcF6lFqC9bYdY+4K4e72qYFAmE=" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f8f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            max-width: 90vw;
+        }
+        h1 {
+            font-size: 1.3rem;
+            margin-top: 0;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="url"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        .error {
+            color: #b00020;
+            margin-top: 0.5rem;
+        }
+        button {
+            margin-top: 1rem;
+            width: 100%;
+            padding: 0.75rem;
+            background: #1976d2;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #125a9c;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Check Frontend Framework</h1>
+    <p>Enter a website URL to detect whether it uses React, Angular, or Vue.</p>
+    <form id="frontend-checker" action="checkfrontend.php" method="get" novalidate>
+        <label for="url">Website URL</label>
+        <input type="url" id="url" name="url" placeholder="https://example.com" required>
+        <div id="error" class="error" aria-live="polite"></div>
+        <button type="submit">Check Framework</button>
+    </form>
+</div>
+<script>
+    $(function () {
+        const errorEl = $('#error');
+        $('#frontend-checker').on('submit', function (event) {
+            const urlVal = $('#url').val().trim();
+            errorEl.text('');
+
+            if (!urlVal) {
+                event.preventDefault();
+                errorEl.text('Please enter a URL.');
+                return;
+            }
+
+            try {
+                const parsed = new URL(urlVal, window.location.href);
+                if (!['http:', 'https:'].includes(parsed.protocol)) {
+                    event.preventDefault();
+                    errorEl.text('Only http or https URLs are supported.');
+                }
+            } catch (e) {
+                event.preventDefault();
+                errorEl.text('Enter a valid URL (e.g., https://example.com).');
+            }
+        });
+    });
+</script>
+</body>
+</html>
